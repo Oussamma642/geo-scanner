@@ -158,7 +158,7 @@ export default function App() {
           <div style={{ paddingTop: '16px' }}>
             <div style={{ ...labelStyle, marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '10px' }}>
               <span style={{ display: 'inline-block', width: '30px', height: '1px', background: 'rgba(200,170,100,0.4)' }} />
-              PROJET DEEP LEARNING — v2.1
+              PROJET DEEP LEARNING — 
             </div>
 
             <h1 style={{

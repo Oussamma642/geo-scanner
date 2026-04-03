@@ -8,3 +8,7 @@ https://www.kaggle.com/datasets/tanyadayanand/geological-image-similarity?select
 https://gts.ai/dataset-download/rock-classification-dataset/
 
 https://gts.ai/dataset-download/rock-classification-dataset/?utm_source=chatgpt.com
+
+
+the recent one:
+https://www.kaggle.com/datasets/stealthtechnologies/rock-classification/data
