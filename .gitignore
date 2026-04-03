@@ -1,5 +1,6 @@
 # Modèles entraînés
-models/
+models/*
+!models/.gitkeep
 *.pth
 *.pt
 
