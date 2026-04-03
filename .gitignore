@@ -1,0 +1,21 @@
+# Modèles entraînés
+models/
+*.pth
+*.pt
+
+# Données
+data/raw/
+data/processed/
+
+# Python
+__pycache__/
+*.pyc
+.env
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
