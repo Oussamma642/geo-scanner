@@ -1,0 +1,47 @@
+Salut ! C'est tout à fait normal de se sentir un peu intimidé au début. Le terme "Deep Learning" peut paraître impressionnant, mais quand on décortique le processus, ce n'est finalement qu'une suite d'étapes très logiques. 
+
+Puisque tu as déjà de bonnes bases en programmation Python et en manipulation de données, tu vas vite te rendre compte que la logique globale reste la même que pour des projets d'analyse de données classiques : on utilise simplement des modèles mathématiques plus complexes (les réseaux de neurones) pour trouver des motifs dans les données.
+
+Pour te clarifier les choses, voici comment se déroule un projet de Deep Learning de A à Z, suivi de conseils pour répondre à la demande de ton professeur.
+
+
+
+### Les 6 étapes d'un projet Deep Learning
+
+**1. La définition de la problématique (C'est ton objectif actuel !)**
+Il s'agit d'identifier un problème scientifique concret et de se demander : *"Est-ce que l'IA peut aider à résoudre ça ?"*
+* *Exemple :* Peut-on détecter la présence d'une maladie pulmonaire à partir d'une simple radiographie du thorax ?
+
+**2. La collecte des données (Data Collection)**
+Le Deep Learning a besoin de *beaucoup* de données pour fonctionner. Une fois le problème défini, il faut trouver la matière première.
+* *Exemple :* Récupérer des milliers d'images de radiographies, certaines "saines" et d'autres "malades", depuis des bases de données médicales publiques.
+
+**3. Le prétraitement des données (Data Preprocessing)**
+Les données brutes sont rarement utilisables telles quelles. Il faut les nettoyer, les normaliser et les formater. Pour des images, cela implique de les redimensionner pour qu'elles aient toutes la même taille, ou de les transformer en matrices de pixels compréhensibles par la machine.
+
+**4. La conception du modèle (Model Design)**
+C'est ici qu'on construit l'architecture du réseau de neurones. Selon le type de données, on choisit une architecture spécifique. 
+* Pour des images, on utilise souvent des **CNN** (Réseaux de neurones convolutifs).
+* Pour du texte ou des séries temporelles, on privilégie les **RNN** ou les **Transformers**.
+
+**5. L'entraînement (Training)**
+On nourrit le modèle avec une grande partie de nos données. L'algorithme va faire des prédictions, calculer son erreur (grâce à des concepts d'algèbre linéaire et de calcul différentiel), et ajuster ses paramètres internes pour s'améliorer au fil des itérations.
+
+**6. L'évaluation et le test (Evaluation)**
+On vérifie si le modèle est performant en le testant sur des données qu'il n'a *jamais* vues pendant l'entraînement. Si les résultats sont bons, le modèle est prêt.
+
+---
+
+### Comment répondre à la demande de ton professeur
+
+Pour le moment, ton professeur ne te demande pas de coder quoi que ce soit. Il te demande de te concentrer **uniquement sur l'étape 1**. 
+
+Voici comment tu peux procéder pour trouver ton sujet :
+
+1.  **Trouve ton binôme :** Associe-toi avec quelqu'un avec qui tu communiques bien.
+2.  **Choisis un domaine qui te parle :** Le professeur a listé Chimie, Biologie, Physique, Géologie, Mathématiques, Éducation. 
+    * *Idée en Biologie :* L'analyse de données cliniques ou d'imagerie médicale est un excellent point d'entrée. C'est très documenté et les jeux de données (datasets) sont nombreux. Tu pourrais proposer de classer des cellules saines et cancéreuses via des images microscopiques.
+    * *Idée en Mathématiques :* Si tu aimes l'algèbre et le calcul, il existe des réseaux de neurones capables de résoudre des équations différentielles complexes (Physics-Informed Neural Networks) pour simuler des phénomènes physiques.
+3.  **Vérifie la disponibilité des données :** C'est la règle d'or. **Ne propose jamais un sujet si tu n'es pas sûr de trouver les données pour l'entraîner.** Avant de remplir le Google Form, allez sur des sites comme *Kaggle* ou *Google Dataset Search* pour vérifier qu'un dataset gratuit et complet existe pour votre idée.
+
+Pour commencer à chercher des idées ou des datasets, parmi les domaines proposés (Biologie, Maths, Physique, etc.), y en a-t-il un qui t'attire le plus naturellement ?

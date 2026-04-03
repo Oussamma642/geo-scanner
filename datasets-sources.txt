@@ -1,0 +1,10 @@
+Classification automatisée de roches magmatiques et métamorphiques par Deep Learning.
+
+
+Kaggle: 
+https://www.kaggle.com/datasets/tanyadayanand/geological-image-similarity?select=geological_similarity
+
+
+https://gts.ai/dataset-download/rock-classification-dataset/
+
+https://gts.ai/dataset-download/rock-classification-dataset/?utm_source=chatgpt.com
