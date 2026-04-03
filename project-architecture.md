@@ -2,16 +2,18 @@ geoscanner/
 │
 ├── data/                       # 🪨 Matière première (Protégé en lecture seule)
 │   ├── raw/
+│   │   ├── .gitkeep            # Structure maintenue, données téléchargées localement
 │   │   └── Rock Data/          # Les 4212 images téléchargées depuis Kaggle
 │   │       ├── train/          # Le manuel d'apprentissage
 │   │       ├── valid/          # L'examen blanc (pendant l'entraînement)
 │   │       └── test/           # L'examen final (jamais vu par le modèle)
 │   └── processed/              # Images redimensionnées ou données intermédiaires
+│       └── .gitkeep            # Structure maintenue, données générées localement
 │
 ├── notebooks/                  # 🔬 Laboratoire d'expérimentation (Brouillons Jupyter)
 │   ├── 01_exploration.ipynb    # Visualisation et comptage des 9 classes de roches
 │   ├── 02_preprocessing.ipynb  # Tests de redimensionnement (224x224) et normalisation
-│   ├── 03_training_resnet50.ipynb # Entraînement du modèle sur Google Colab (GPU)
+│   ├── 03_training_resnet50.ipynb  # Entraînement du modèle sur Google Colab (GPU)
 │   └── 04_evaluation.ipynb     # Calcul de la précision finale et Matrice de Confusion
 │
 ├── src/                        # ⚙️ Moteur industriel (Code Python propre et définitif)
@@ -23,21 +25,23 @@ geoscanner/
 │   └── predict.py              # Fonction cruciale : prend une image -> renvoie la prédiction
 │
 ├── models/                     # 🧠 Coffre-fort du modèle (Ignoré par Git)
-│   └── resnet50_best.pth       # Les poids mathématiques sauvegardés après l'entraînement
+│   └── .gitkeep                # Structure maintenue sur GitHub
+│   # ⚠️ resnet50_best.pth stocké sur Google Drive (trop lourd pour Git)
 │
-├── api/                        # 🌐 Serveur Backend (FastAPI)
+├── api/                        # 🌐 Serveur Backend (Flask)
 │   ├── app.py                  # Le point d'entrée qui réceptionne les requêtes HTTP
 │   └── utils.py                # Fonctions d'aide (vérification du format de l'image, etc.)
 │
-├── frontend/                   # 💻 Interface Utilisateur (React)
+├── frontend/                   # 💻 Interface Utilisateur (React + Vite + Tailwind)
 │   ├── src/
 │   │   └── App.jsx             # Le site web où l'utilisateur upload sa photo de roche
 │   └── package.json            # Dépendances Node.js du frontend
 │
 ├── reports/                    # 📊 Vitrine académique (Pour le professeur)
 │   ├── figures/                # Courbes d'entraînement et Matrices de Confusion générées
+│   │   └── .gitkeep            # Structure maintenue sur GitHub
 │   └── rapport.pdf             # Le document final expliquant la démarche scientifique
 │
 ├── requirements.txt            # 📦 Passeport du projet (Liste des dépendances Python)
-├── .gitignore                  # 🚫 Fichiers à ne pas envoyer sur GitHub (ex: models/, data/)
-└── README.md                   # 📖 La page d'accueil de ton projet GitHub
+├── .gitignore                  # 🚫 Fichiers exclus de GitHub (models/, data/raw/)
+└── README.md                   # 📖 La page d'accueil du projet sur GitHub
