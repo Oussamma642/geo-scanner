@@ -1,0 +1,13 @@
+-Le modèle ResNet-50 fine-tuné atteint une accuracy de 68% sur le jeu de test, soit une amélioration de 57 points par rapport à une classification aléatoire (11%). Les performances varient significativement selon les classes : les roches visuellement distinctives (olivine-basalt 96%, Siliceous-sinter 88%) sont très bien identifiées, tandis que les roches sédimentaires similaires (Clay 47%, Shale 41%) restent difficiles à distinguer. Ces résultats sont cohérents avec la littérature sur la classification de roches par CNN sur des datasets de taille limitée.
+
+-> Raison 1 — Similarité visuelle des classes
+Clay, Shale, Chert et Diatomite sont des roches sédimentaires à grains fins visuellement très proches. Même un géologue débutant aurait du mal à les distinguer sur photo.
+
+-> Raison 2 — Dataset limité
+~410 images réelles par classe
+après déduplication des augmentations ×3
+→ insuffisant pour les classes difficiles
+
+-> Raison 3 — Qualité des photos
+Les images Roboflow sont des photos brutes prises dans des conditions variables (éclairage, angle, zoom) — pas des photos standardisées en laboratoire.
+
