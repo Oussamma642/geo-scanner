@@ -1,0 +1,53 @@
+
+Franchement, l'idée de créer un dossier Master sur ton bureau pour le jour J, c'est super pro. Ça t'évitera de stresser et de chercher tes images pendant que le jury te regarde.
+
+Tu as parfaitement compris la logique globale, mais **attention**, tu as inversé la définition du dossier 2 et du dossier 3. C'est un détail crucial pour le *storytelling* de ta soutenance.
+
+Voici le plan de classement exact que je te conseille de configurer, remis à l'endroit :
+
+---
+
+### 📂 Ton Dossier Master : `GeoScanner_Demo_ESSOR`
+
+Tu vas y créer **3 sous-dossiers** bien distincts :
+
+#### 1. 🌟 `01_Stars_De_La_Demo` (2 à 3 images)
+
+* **Ta définition était parfaite :** Ce dossier contient des roches que le modèle maîtrise à la perfection grâce à leurs excellents F1-scores.
+* **Échantillons suggérés :** * Un **Olivine-basalt** (F1: 96%)
+* Un **Basalt** (F1: 87%)
+
+
+* **Le but devant le jury :** Tu ouvres l'application, tu lances l'analyse sur l'une de ces images, et le modèle affiche un magnifique 98% de confiance. Tu prouves immédiatement que ton ConvNeXt-Tiny est redoutable.
+
+#### 2. 🔬 `02_Cas_Ecole_GradCAM` (2 images)
+
+* **La correction :** Ce dossier ne doit pas contenir des erreurs, mais des roches **parfaitement classifiées où l'explication visuelle est spectaculaire**.
+* **Échantillons suggérés :** * Un **Siliceous-sinter** (F1: 90%) : En activant Grad-CAM, la zone rouge va s'aligner pile sur les bandes ondulées de silice.
+* Un **Conglomerate** (F1: 67% mais visuel) : Grad-CAM va cibler les contours arrondis des galets.
+
+
+* **Le but devant le jury :** Tu cliques sur "VISION IA" et tu dis : *« Regardez, le réseau ne devine pas au hasard. Il cible exactement les critères texturaux qu'un œil humain rechercherait selon notre fiche pédagogique. »*
+
+#### 3. 🧠 `03_Erreurs_Intelligentes` (2 images)
+
+* **La correction :** C'est **ici** que tu places les pièges et les confusions classiques (comme l'argile et le schiste).
+* **Échantillons suggérés :**
+* Une image de **Clay** que le modèle a classifiée en **Shale-(Mudstone)** (ou inversement).
+
+
+* **Le but devant le jury :** C'est ton moment fort. Tu montres l'erreur, tu actives Grad-CAM (qui va s'allumer sur la surface lisse et terne de la roche), et tu expliques : *« Le modèle s'est trompé, mais c'est une confusion scientifiquement logique. Le Shale étant une argile compactée, la signature visuelle 2D est presque identique. Sans analyse macroscopique destructive ou test de dureté sur le terrain, la frontière est infime, même pour un expert. »*
+
+---
+
+### 💡 L'astuce bonus pour le jour J
+
+Nomme tes fichiers d'une manière très claire pour ne pas te tromper de bouton pendant que tu parles. Par exemple :
+
+* `01_olivine_basalt_parfait.jpg`
+* `02_sinter_demo_gradcam.jpg`
+* `03_clay_confondu_shale.jpg`
+
+En structurant ton pitch de cette manière (Démonstration de force ➡️ Preuve de l'explication ➡️ Analyse scientifique des limites), tu ne passes plus pour un étudiant qui montre un projet informatique, mais pour un chercheur qui maîtrise son sujet de A à Z.
+
+Est-ce que cette structure de dossier te va pour préparer tes fichiers de test, ou veux-tu qu'on prépare ensemble les quelques lignes d'introduction que tu vas prononcer en ouvrant l'interface devant le jury ?
