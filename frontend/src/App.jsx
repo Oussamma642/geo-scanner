@@ -52,32 +52,89 @@ function StrataBackground() {
   );
 }
 
+// const ROCK_CLASSES = [
+//   { name: "Marbre", icon: "◈", color: "#e8d5a3", bg: "rgba(232,213,163,0.12)" },
+//   {
+//     name: "Quartzite",
+//     icon: "◇",
+//     color: "#b8cce0",
+//     bg: "rgba(184,204,224,0.10)",
+//   },
+//   { name: "Gneiss", icon: "◆", color: "#c4b5a0", bg: "rgba(196,181,160,0.10)" },
+//   {
+//     name: "Rhyolite",
+//     icon: "◉",
+//     color: "#d4a898",
+//     bg: "rgba(212,168,152,0.10)",
+//   },
+//   {
+//     name: "Andésite",
+//     icon: "◑",
+//     color: "#a0b8a0",
+//     bg: "rgba(160,184,160,0.10)",
+//   },
+//   {
+//     name: "Schiste",
+//     icon: "◐",
+//     color: "#b0a8c8",
+//     bg: "rgba(176,168,200,0.10)",
+//   },
+// ];
+
 const ROCK_CLASSES = [
-  { name: "Marbre", icon: "◈", color: "#e8d5a3", bg: "rgba(232,213,163,0.12)" },
   {
-    name: "Quartzite",
-    icon: "◇",
-    color: "#b8cce0",
-    bg: "rgba(184,204,224,0.10)",
-  },
-  { name: "Gneiss", icon: "◆", color: "#c4b5a0", bg: "rgba(196,181,160,0.10)" },
-  {
-    name: "Rhyolite",
-    icon: "◉",
-    color: "#d4a898",
-    bg: "rgba(212,168,152,0.10)",
+    name: "Basalt",
+    icon: "⬢",
+    color: "#4b4b4b",
+    bg: "rgba(75,75,75,0.12)",
   },
   {
-    name: "Andésite",
-    icon: "◑",
-    color: "#a0b8a0",
-    bg: "rgba(160,184,160,0.10)",
+    name: "Clay",
+    icon: "◌",
+    color: "#b86b52",
+    bg: "rgba(184,107,82,0.10)",
   },
   {
-    name: "Schiste",
-    icon: "◐",
-    color: "#b0a8c8",
-    bg: "rgba(176,168,200,0.10)",
+    name: "Conglomerate",
+    icon: "⬡",
+    color: "#8c6f56",
+    bg: "rgba(140,111,86,0.10)",
+  },
+  {
+    name: "Diatomite",
+    icon: "◈",
+    color: "#d8d2c4",
+    bg: "rgba(216,210,196,0.10)",
+  },
+  {
+    name: "Shale-(Mudstone)",
+    icon: "▤",
+    color: "#5c5c5c",
+    bg: "rgba(92,92,92,0.10)",
+  },
+  {
+    name: "Siliceous-sinter",
+    icon: "◍",
+    color: "#d6c7a1",
+    bg: "rgba(214,199,161,0.10)",
+  },
+  {
+    name: "chert",
+    icon: "◆",
+    color: "#8a5a44",
+    bg: "rgba(138,90,68,0.10)",
+  },
+  {
+    name: "gypsum",
+    icon: "⬠",
+    color: "#f1e7d0",
+    bg: "rgba(241,231,208,0.10)",
+  },
+  {
+    name: "olivine-basalt",
+    icon: "✦",
+    color: "#6c8b3c",
+    bg: "rgba(108,139,60,0.10)",
   },
 ];
 
@@ -104,6 +161,9 @@ export default function App() {
   const [result, setResult] = useState(null);
   const [loadingStep, setLoadingStep] = useState(0);
 
+  // 🌟 NOUVEAU : Gère l'affichage du Grad-CAM
+  const [showGradCam, setShowGradCam] = useState(false);
+
   const LOADING_STEPS = [
     "Calibration spectrale...",
     "Extraction des features CNN...",
@@ -115,6 +175,7 @@ export default function App() {
       setSelectedFile(file); // ON SAUVEGARDE LE FICHIER POUR L'API
       setSelectedImage(URL.createObjectURL(file));
       setResult(null);
+      setShowGradCam(false); // 🌟 AJOUT
     }
   };
 
@@ -124,35 +185,6 @@ export default function App() {
     const file = e.dataTransfer.files[0];
     if (file) handleImageUpload(file);
   };
-
-  /*
-  const handleAnalysis = () => {
-    if (!selectedImage) return;
-    setIsAnalyzing(true);
-    setLoadingStep(0);
-    const stepInterval = setInterval(() => {
-      setLoadingStep(s => s + 1);
-    }, 900);
-    setTimeout(() => {
-      clearInterval(stepInterval);
-      setIsAnalyzing(false);
-      setResult({
-        prediction: 'Marbre',
-        confidence: 94.5,
-        formation: 'Métamorphique',
-        hardness: '3–4 Mohs',
-        details: [
-          { class: 'Marbre', score: 94.5 },
-          { class: 'Quartzite', score: 3.2 },
-          { class: 'Gneiss', score: 1.1 },
-          { class: 'Rhyolite', score: 0.8 },
-          { class: 'Andésite', score: 0.3 },
-          { class: 'Schiste', score: 0.1 },
-        ],
-      });
-    }, 2800);
-  };
-*/
 
   const handleAnalysis = async () => {
     if (!selectedFile) return;
@@ -187,12 +219,20 @@ export default function App() {
       setIsAnalyzing(false);
 
       // On met à jour l'interface avec les vraies données
+      // setResult({
+      //   prediction: data.prediction,
+      //   confidence: data.confidence,
+      //   formation: "Analyse CNN", // On met des valeurs génériques car l'API ne les renvoie pas encore
+      //   hardness: "Variable",
+      //   details: formattedDetails,
+      // });
+      // 🌟 MODIFICATION : On stocke la pédagogie et le Grad-CAM
       setResult({
         prediction: data.prediction,
         confidence: data.confidence,
-        formation: "Analyse CNN", // On met des valeurs génériques car l'API ne les renvoie pas encore
-        hardness: "Variable",
         details: formattedDetails,
+        pedagogy: data.pedagogy, // NOUVEAU (vient de Flask)
+        gradcam_image: data.gradcam_image, // NOUVEAU (vient de Flask)
       });
     } catch (error) {
       console.error("Erreur de connexion à l'API :", error);
@@ -204,8 +244,10 @@ export default function App() {
 
   const reset = () => {
     setSelectedImage(null);
+    setSelectedFile(null); // (N'oublie pas de reset le file aussi)
     setResult(null);
     setIsAnalyzing(false);
+    setShowGradCam(false); // 🌟 AJOUT
   };
 
   const goldAccent = "#c8a96e";
@@ -285,7 +327,7 @@ export default function App() {
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
             {[
-              { icon: <Activity size={12} />, label: "6 CLASSES" },
+              { icon: <Activity size={12} />, label: "9 CLASSES" },
               { icon: <CheckCircle size={12} />, label: "CNN ACTIF" },
             ].map(({ icon, label }) => (
               <div
@@ -397,7 +439,7 @@ export default function App() {
             >
               Ce système exploite des réseaux de neurones convolutifs entraînés
               sur des milliers d'échantillons pour identifier la signature
-              minéralogique de 6 familles de roches magmatiques et
+              minéralogique de 9 familles de roches magmatiques et
               métamorphiques.
             </p>
 
@@ -607,7 +649,7 @@ export default function App() {
                       marginBottom: "20px",
                     }}
                   >
-                    <img
+                    {/* <img
                       src={selectedImage}
                       alt="Échantillon"
                       style={{
@@ -616,7 +658,52 @@ export default function App() {
                         objectFit: "cover",
                         display: "block",
                       }}
+                    /> */}
+                    <img
+                      // 🌟 Bascule automatique entre l'image normale et la heatmap
+                      src={
+                        showGradCam && result?.gradcam_image
+                          ? result.gradcam_image
+                          : selectedImage
+                      }
+                      alt="Échantillon"
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        display: "block",
+                        transition: "all 0.4s ease", // Animation douce lors du changement
+                      }}
                     />
+
+                    {/* 🌟 LE BOUTON GRAD-CAM (Superposé en bas à droite) */}
+                    {result && result.gradcam_image && (
+                      <button
+                        onClick={() => setShowGradCam(!showGradCam)}
+                        style={{
+                          ...labelStyle, // 🌟 DÉPLACÉ ICI AU DÉBUT !
+                          position: "absolute",
+                          bottom: "10px",
+                          right: "10px",
+                          zIndex: 20,
+                          background: showGradCam
+                            ? goldAccent
+                            : "rgba(20,15,10,0.8)",
+                          border: `1px solid ${goldAccent}`,
+                          color: showGradCam ? "#1a1510" : goldAccent, // 🌟 MAINTENANT ÇA FONCTIONNE
+                          cursor: "pointer",
+                          padding: "6px 12px",
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "8px",
+                          fontSize: "9px",
+                          transition: "all 0.3s ease",
+                        }}
+                      >
+                        <Activity size={12} />
+                        {showGradCam ? "VUE ORIGINALE" : "VISION IA (GRAD-CAM)"}
+                      </button>
+                    )}
                     <div
                       style={{
                         position: "absolute",
@@ -795,7 +882,7 @@ export default function App() {
                   )}
 
                   {/* RESULTS */}
-                  
+
                   {result && (
                     <div style={{ animation: "fadeUp 0.5s ease" }}>
                       {/* Main prediction */}
@@ -840,7 +927,7 @@ export default function App() {
                             {result.confidence}%
                           </span>
                         </div>
-                        <div style={{ display: "flex", gap: "16px" }}>
+                        {/* <div style={{ display: "flex", gap: "16px" }}>
                           <div>
                             <div
                               style={{
@@ -881,7 +968,38 @@ export default function App() {
                               {result.hardness}
                             </div>
                           </div>
-                        </div>
+                        </div> */}
+
+                        {/* 🌟 LA FICHE PÉDAGOGIQUE COMPLÈTE */}
+                        {result.pedagogy && (
+                          <div style={{ marginTop: "16px", paddingTop: "16px", borderTop: "1px solid rgba(200,170,100,0.1)" }}>
+                            
+                            {/* Famille */}
+                            <div style={{ marginBottom: "12px" }}>
+                              <div style={{ ...labelStyle, fontSize: "9px", marginBottom: "4px" }}>FAMILLE GÉOLOGIQUE</div>
+                              <div style={{ fontSize: "13px", color: "rgba(210,195,170,0.9)", fontFamily: "'Courier New', monospace" }}>
+                                {result.pedagogy.famille}
+                              </div>
+                            </div>
+                            
+                            {/* Description (en italique pour faire "Note de carnet") */}
+                            <div style={{ marginBottom: "12px" }}>
+                              <div style={{ ...labelStyle, fontSize: "9px", marginBottom: "4px" }}>DESCRIPTION</div>
+                              <div style={{ fontSize: "12px", color: "rgba(210,195,170,0.6)", lineHeight: "1.6", fontFamily: "'Georgia', serif", fontStyle: "italic" }}>
+                                {result.pedagogy.description}
+                              </div>
+                            </div>
+                            
+                            {/* Critères IA (Mis en valeur avec la couleur or) */}
+                            <div>
+                              <div style={{ ...labelStyle, fontSize: "9px", marginBottom: "4px", color: goldAccent }}>CRITÈRES D'IDENTIFICATION</div>
+                              <div style={{ fontSize: "12px", color: "rgba(200,170,100,0.8)", lineHeight: "1.5", fontFamily: "'Courier New', monospace" }}>
+                                {result.pedagogy.criteres_visuels}
+                              </div>
+                            </div>
+                            
+                          </div>
+                        )}
                       </div>
 
                       {/* Softmax output */}
