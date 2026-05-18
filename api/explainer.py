@@ -1,4 +1,3 @@
-
 # pfm/api/explainer.py
 
 import cv2
@@ -9,8 +8,15 @@ from pytorch_grad_cam.utils.image import show_cam_on_image
 from pytorch_grad_cam.utils.model_targets import ClassifierOutputTarget
 
 def generate_gradcam_base64(model, input_tensor, visual_image, target_class_index):
-    # 1. Définir la couche cible (Pour ResNet50, c'est la dernière couche convolutive)
-    target_layers = [model.layer4[-1]]
+    # 1. Définir la couche cible
+    
+    # --- ANCIEN CODE (ResNet50) ---
+    # Pour ResNet, la dernière couche convolutive s'appelle layer4
+    # target_layers = [model.layer4[-1]]
+    
+    # +++ NOUVEAU CODE (ConvNeXt-Tiny) +++
+    # Pour ConvNeXt, on cible le dernier sous-bloc du dernier stage de caractéristiques
+    target_layers = [model.features[-1][-1]]
     
     # 2. Initialiser l'outil Grad-CAM
     cam = GradCAM(model=model, target_layers=target_layers)
